@@ -1,5 +1,7 @@
 presentation/dist/
 presentation/dist/*
+presentation/media/
+presentation/media/*
 presentation/plugin/
 presentation/plugin/*
 presentation/index.html
