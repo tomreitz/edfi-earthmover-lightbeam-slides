@@ -148,7 +148,8 @@ connection:
   backoff_factor: 1.5
   retry_statuses: [429, 500, 502, 503, 504]
   verify_ssl: True
-```<!-- .element: class="fragment" data-fragment-index="2" -->
+``` 
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 
 
