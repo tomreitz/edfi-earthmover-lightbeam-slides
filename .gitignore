@@ -1,2 +1,6 @@
-
-presentation/*
+presentation/dist/
+presentation/dist/*
+presentation/plugin/
+presentation/plugin/*
+presentation/index.html
+presentation/LICENSE
