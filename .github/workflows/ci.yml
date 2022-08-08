@@ -14,4 +14,4 @@ jobs:
           python-version: 3.x
       - run: pip install git+https://gitlab.com/da_doomer/markdown-slides.git
       - run: mdslides presentation.md --include media
-      - run: rm -rf docs/ && mv presentation/ docs/
+#       - run: rm -rf docs/ && mv presentation/ docs/

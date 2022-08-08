@@ -8,3 +8,5 @@ mdslides ./presentation.md --include media
 ```
 
 Then you can presentation/index.html in your browser to view the presentation.
+
+Or you should be able to [view the slides online here](https://tomreitz.github.io/edfi-earthmover-lightbeam-slides/presentation/).
