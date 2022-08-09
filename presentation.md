@@ -21,7 +21,7 @@ Data into Ed-Fi with<br /><code style="color:#007978;">earthmover</code> + <code
 * requires a map (columns &rarr; Ed-Fi resources, fields)  <!-- .element: class="fragment" data-fragment-index="3" -->
 * mappings exist for several assessments                   <!-- .element: class="fragment" data-fragment-index="4" -->
 * complex data transformations cannot be done in the tool (requires Powershell script, SQL, etc.)  <!-- .element: class="fragment" data-fragment-index="5" -->
-* UI-based import makes automation difficult               <!-- .element: class="fragment" data-fragment-index="6" -->
+* UI-based import makes automation difficult, though there is a scheduler  <!-- .element: class="fragment" data-fragment-index="6" -->
 
 
 
@@ -161,6 +161,7 @@ Putting it all together
 earthmover path/to/config.yaml
 lightbeam path/to/config.yaml
 ```
+<small>(requires external orchestration - CRON, Airflow, Dagster, etc.)</small>
 
 
 [comment]: # (!!! data-auto-animate data-background-color="#cbdc3f")
@@ -228,7 +229,7 @@ lightbeam path/to/config.yaml
 
 <a href="https://github.com/edanalytics/earthmover" target="_blank" style="color:#007978;">earthmover</a> + <a href="https://github.com/edanalytics/lightbeam" target="_blank" style="color:#1c5ca7;">lightbeam</a> are currently<br />private GitHub repositories.
 
-We plan to release them as open-source<br />(Apache 2.0 license) projects shortly.
+We plan to release them as open-source<br />(likely Apache 2.0 license) projects shortly.
 
 Extensive docs and examples are available.
 
