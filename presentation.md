@@ -197,6 +197,23 @@ lightbeam path/to/config.yaml
 [comment]: # (||| data-auto-animate)
 
 ### Features
+* <code style="color:#007978;">earthmover</code> source data quality expectations
+  ```yaml
+  # earthmover
+  sources:
+    schools:
+      file: ./data/Schools.csv
+      header_rows: 1
+      expect:
+        - low_grade != ''
+        - high_grade != ''
+        - low_grade|int <= high_grade|int
+  ```
+  <small>(run fails if expectations not met)</small>
+
+[comment]: # (||| data-auto-animate)
+
+### Features
 * <code style="color:#007978;">earthmover</code> state tracking: only reprocess if source files changed (based on file hash)
   ```yaml
   # earthmover
