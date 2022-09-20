@@ -16,23 +16,6 @@ Data into Ed-Fi with<br /><code style="color:#007978;">earthmover</code> + <code
 
 [comment]: # (!!! data-auto-animate)
 
-### Ed-Fi Data Import Tool
-* imports data from flat files                             <!-- .element: class="fragment" data-fragment-index="2" -->
-* requires a map (columns &rarr; Ed-Fi resources, fields)  <!-- .element: class="fragment" data-fragment-index="3" -->
-* mappings exist for several assessments                   <!-- .element: class="fragment" data-fragment-index="4" -->
-* complex data transformations cannot be done in the tool (requires Powershell script, SQL, etc.)  <!-- .element: class="fragment" data-fragment-index="5" -->
-* UI-based import makes automation tricky, though there is a scheduler  <!-- .element: class="fragment" data-fragment-index="6" -->
-
-
-
-[comment]: # (!!! data-auto-animate)
-
-### Instead: <code style="color:#007978;">earthmover</code> + <code style="color:#1c5ca7;">lightbeam</code>
-
-
-
-[comment]: # (!!! data-auto-animate)
-
 ### <code style="color:#007978;">earthmover</code>
 * a Python CLI tool  <!-- .element: class="fragment" data-fragment-index="2" -->
 * constructs Ed-Fi JSON from flat files based on a YAML configuration  <!-- .element: class="fragment" data-fragment-index="3" -->
@@ -44,7 +27,7 @@ Data into Ed-Fi with<br /><code style="color:#007978;">earthmover</code> + <code
 [comment]: # (!!! data-auto-animate)
 
 ### <code style="color:#FFF;">earthmover</code> configuration
-```yaml  [|4-10|12-21|23-34]
+```yaml  [|4-10|12-21|23-30]
 config:
   output_dir: ./
 
@@ -69,16 +52,12 @@ transformations:
 
 destinations:
   # a destination for each Ed-Fi resource and descriptor
-  schools:
+  schools.jsonl:
     source: $sources.schools
     template: ./json_templates/school.jsont
-    extension: jsonl
-    linearize: True
-  courses:
+  courses.jsonl:
     source: $transformations.courses
     template: ./json_templates/course.jsont
-    extension: jsonl
-    linearize: True
 ```
 
 
@@ -131,9 +110,8 @@ destinations:
 [comment]: # (!!! data-auto-animate)
 
 ### <code style="color:#FFF;">lightbeam</code> configuration
-```yaml  [|1|2|3-9|8-9|10-16]
+```yaml  [|1|2-8|7-8|9-15]
 data_dir: ./
-validate: True
 edfi_api:
   base_url: https://api.schooldistrict.org/v5.3/api
   version: 3
@@ -158,8 +136,8 @@ connection:
 Putting it all together
 
 ```bash
-earthmover path/to/config.yaml
-lightbeam path/to/config.yaml
+earthmover run path/to/config.yaml
+lightbeam validate+send path/to/config.yaml
 ```
 <small>(requires external orchestration - CRON, Airflow, Dagster, etc.)</small>
 
@@ -175,8 +153,8 @@ lightbeam path/to/config.yaml
 ### Features
 * selectors: process only some descriptors/resources
   ```bash
-  earthmover path/to/config.yaml -s courses,student*
-  lightbeam path/to/config.yaml -s courses,student*
+  earthmover run path/to/config.yaml -s courses,student*
+  lightbeam send path/to/config.yaml -s courses,student*
   ```
 
 [comment]: # (||| data-auto-animate)
@@ -184,11 +162,11 @@ lightbeam path/to/config.yaml
 ### Features
 * use environment variables or command-line parameters (which override env vars)
   ```bash
-  earthmover path/to/config.yaml -p '{\
+  earthmover run path/to/config.yaml -p '{\
   "BASE_DIR":"path/to/base/dir"\
   }'
 
-  lightbeam path/to/config.yaml -p '{\
+  lightbeam send path/to/config.yaml -p '{\
   "CLIENT_ID":"populated",\
   "CLIENT_SECRET":"populatedSecret"\
   }'
@@ -214,7 +192,7 @@ lightbeam path/to/config.yaml
 [comment]: # (||| data-auto-animate)
 
 ### Features
-* <code style="color:#007978;">earthmover</code> state tracking: only reprocess if source files changed (based on file hash)
+* <code style="color:#007978;">earthmover</code> state tracking: only re-process if source files change (based on file hash)
   ```yaml
   # earthmover
   config:
@@ -231,14 +209,14 @@ lightbeam path/to/config.yaml
   ```
 
   ```bash
-  lightbeam path/to/config.yaml --newer-than 2020-12-25T00:00:00
+  lightbeam send path/to/config.yaml --newer-than 2020-12-25T00:00:00
   ```
 
 [comment]: # (||| data-auto-animate)
 
 ### Features
-* <code style="color:#007978;">earthmover</code> supports source files larger than memory (via chunking)
-* tested with attendance data of 2GB+
+* <code style="color:#007978;">earthmover</code> supports source files larger than memory (via dask)
+* tested with attendance data of 3GB+
 
 
 
