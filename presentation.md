@@ -33,31 +33,32 @@ config:
 
 sources:
   courses:
-    file: ./data/Courses.csv
+    file: ./sources/Courses.csv
     header_rows: 1
   schools:
-    file: ./data/Schools.csv
+    file: ./sources/Schools.csv
     header_rows: 1
 
 transformations:
   courses:
-    - operations: join
-      sources:
-        - $sources.courses
-        - $sources.schools
-      join_type: inner
-      left_key: school_id
-      right_key: school_id
-    ...
+    operations:
+      - operation: join
+        sources:
+          - $sources.courses
+          - $sources.schools
+        join_type: inner
+        left_key: school_id
+        right_key: school_id
+      ...
 
 destinations:
   # a destination for each Ed-Fi resource and descriptor
   schools.jsonl:
     source: $sources.schools
-    template: ./json_templates/school.jsont
+    template: ./templates/school.jsont
   courses.jsonl:
     source: $transformations.courses
-    template: ./json_templates/course.jsont
+    template: ./templates/course.jsont
 ```
 
 
@@ -136,8 +137,8 @@ connection:
 Putting it all together
 
 ```bash
-earthmover run path/to/config.yaml
-lightbeam validate+send path/to/config.yaml
+earthmover run -c path/to/config.yaml
+lightbeam validate+send -c path/to/config.yaml
 ```
 <small>(requires external orchestration - CRON, Airflow, Dagster, etc.)</small>
 
@@ -153,8 +154,8 @@ lightbeam validate+send path/to/config.yaml
 ### Features
 * selectors: process only some descriptors/resources
   ```bash
-  earthmover run path/to/config.yaml -s courses,student*
-  lightbeam send path/to/config.yaml -s courses,student*
+  earthmover run -c path/to/config.yaml -s courses,student*
+  lightbeam send -c path/to/config.yaml -s courses,student*
   ```
 
 [comment]: # (||| data-auto-animate)
@@ -162,11 +163,11 @@ lightbeam validate+send path/to/config.yaml
 ### Features
 * use environment variables or command-line parameters (which override env vars)
   ```bash
-  earthmover run path/to/config.yaml -p '{\
+  earthmover run -c path/to/config.yaml -p '{\
   "BASE_DIR":"path/to/base/dir"\
   }'
 
-  lightbeam send path/to/config.yaml -p '{\
+  lightbeam send -c path/to/config.yaml -p '{\
   "CLIENT_ID":"populated",\
   "CLIENT_SECRET":"populatedSecret"\
   }'
@@ -180,7 +181,7 @@ lightbeam validate+send path/to/config.yaml
   # earthmover
   sources:
     schools:
-      file: ./data/Schools.csv
+      file: ./sources/Schools.csv
       header_rows: 1
       expect:
         - low_grade != ''
@@ -209,7 +210,7 @@ lightbeam validate+send path/to/config.yaml
   ```
 
   ```bash
-  lightbeam send path/to/config.yaml --newer-than 2020-12-25T00:00:00
+  lightbeam send -c path/to/config.yaml --newer-than 2020-12-25T00:00:00
   ```
 
 [comment]: # (||| data-auto-animate)
