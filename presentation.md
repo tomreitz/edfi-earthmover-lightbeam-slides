@@ -120,7 +120,7 @@ edfi_api:
   mode: year_specific
   year: 2021
   client_id: ${EDFI_API_CLIENT_ID}
-  client_secret: ${${EDFI_API_CLIENT_SECRET}
+  client_secret: ${EDFI_API_CLIENT_SECRET}
 connection:
   pool_size: 8
   timeout: 60
