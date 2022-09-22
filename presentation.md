@@ -224,9 +224,9 @@ lightbeam validate+send -c path/to/config.yaml
 
 [comment]: # (!!!)
 
-<a href="https://github.com/edanalytics/earthmover" target="_blank" style="color:#007978;">earthmover</a> + <a href="https://github.com/edanalytics/lightbeam" target="_blank" style="color:#1c5ca7;">lightbeam</a> are public,<br />open-source GitHub repositories available under the Apache 2.0 license.
+<a href="https://github.com/edanalytics/earthmover" target="_blank" style="color:#007978;">earthmover</a> + <a href="https://github.com/edanalytics/lightbeam" target="_blank" style="color:#1c5ca7;">lightbeam</a> are public,<br />open-source GitHub repositories available<br />under the Apache 2.0 license.
 
-Extensive docs and examples are available at the project repos.
+Extensive docs and examples are<br />available at the project repos.
 
 [comment]: # (!!!)
 
