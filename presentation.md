@@ -10,7 +10,8 @@ Data into Ed-Fi with<br /><code style="color:#007978;">earthmover</code> + <code
 
 <hr style="border-width:1px 0 0 0;" />
 
-<div style="font-size:26px; line-height:56px;"><strong>Tom Reitz</strong> &nbsp; &nbsp; Data Engineer @ <img src="media/ea_logo.png" style="height:48px; width:auto; margin:0; padding:0 10px; vertical-align:middle;" /></div>
+<!-- <strong>Tom Reitz</strong> &nbsp; &nbsp;  -->
+<div style="font-size:26px; line-height:56px;">Data Engineering @ <img src="media/ea_logo.png" style="height:48px; width:auto; margin:0; padding:0 10px; vertical-align:middle;" /></div>
 
 
 
@@ -223,15 +224,13 @@ lightbeam validate+send -c path/to/config.yaml
 
 [comment]: # (!!!)
 
-<a href="https://github.com/edanalytics/earthmover" target="_blank" style="color:#007978;">earthmover</a> + <a href="https://github.com/edanalytics/lightbeam" target="_blank" style="color:#1c5ca7;">lightbeam</a> are currently<br />private GitHub repositories.
+<a href="https://github.com/edanalytics/earthmover" target="_blank" style="color:#007978;">earthmover</a> + <a href="https://github.com/edanalytics/lightbeam" target="_blank" style="color:#1c5ca7;">lightbeam</a> are public,<br />open-source GitHub repositories available under the Apache 2.0 license.
 
-We plan to release them as open-source<br />(likely Apache 2.0 license) projects shortly.
-
-Extensive docs and examples are available.
+Extensive docs and examples are available at the project repos.
 
 [comment]: # (!!!)
 
-We've also translated ~20 existing Data Import Tool mappings for assessment data into reusable <a href="https://github.com/edanalytics/earthmover_edfi_bundles" target="_blank">earthmover Ed-Fi bundles</a> which will be open-sourced.
+We've also translated ~20 existing Data Import Tool mappings for assessment data into reusable <a href="https://github.com/edanalytics/earthmover_edfi_bundles" target="_blank">earthmover Ed-Fi bundles</a> which will be open-sourced soon.
 
 ![media/earthmover-assessment-bundles.png](media/earthmover-assessment-bundles.png)
 
