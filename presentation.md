@@ -28,7 +28,7 @@ Data into Ed-Fi with<br /><code style="color:#007978;">earthmover</code> + <code
 [comment]: # (!!! data-auto-animate)
 
 ### <code style="color:#FFF;">earthmover</code> configuration
-```yaml  [|4-10|12-21|23-30]
+```yaml  [|1-2|4-10|12-21|23-35]
 config:
   output_dir: ./
 
@@ -54,12 +54,17 @@ transformations:
 
 destinations:
   # a destination for each Ed-Fi resource and descriptor
-  schools.jsonl:
+  schools:
     source: $sources.schools
     template: ./templates/school.jsont
-  courses.jsonl:
+    extension: jsonl
+    linearize: True
+
+  courses:
     source: $transformations.courses
     template: ./templates/course.jsont
+    extension: jsonl
+    linearize: True
 ```
 
 
@@ -138,8 +143,9 @@ connection:
 Putting it all together
 
 ```bash
-earthmover run -c path/to/config.yaml
-lightbeam validate+send -c path/to/config.yaml
+pip install earthmover lightbeam
+earthmover run -c path/to/earthmover.yaml
+lightbeam validate+send -c path/to/lightbeam.yaml
 ```
 <small>(requires external orchestration - CRON, Airflow, Dagster, etc.)</small>
 
@@ -155,8 +161,8 @@ lightbeam validate+send -c path/to/config.yaml
 ### Features
 * selectors: process only some descriptors/resources
   ```bash
-  earthmover run -c path/to/config.yaml -s courses,student*
-  lightbeam send -c path/to/config.yaml -s courses,student*
+  earthmover run -c path/to/earthmover.yaml -s courses,student*
+  lightbeam send -c path/to/lightbeam.yaml -s courses,student*
   ```
 
 [comment]: # (||| data-auto-animate)
@@ -164,11 +170,11 @@ lightbeam validate+send -c path/to/config.yaml
 ### Features
 * use environment variables or command-line parameters (which override env vars)
   ```bash
-  earthmover run -c path/to/config.yaml -p '{\
+  earthmover run -c path/to/earthmover.yaml -p '{\
   "BASE_DIR":"path/to/base/dir"\
   }'
 
-  lightbeam send -c path/to/config.yaml -p '{\
+  lightbeam send -c path/to/lightbeam.yaml -p '{\
   "CLIENT_ID":"populated",\
   "CLIENT_SECRET":"populatedSecret"\
   }'
