@@ -28,7 +28,9 @@ Data into Ed-Fi with<br /><code style="color:#007978;">earthmover</code> + <code
 [comment]: # (!!! data-auto-animate)
 
 ### <code style="color:#FFF;">earthmover</code> configuration
-```yaml  [|1-2|4-10|12-21|23-35]
+```yaml  [|3-4|6-12|14-23|25-37]
+version: 2
+
 config:
   output_dir: ./
 
@@ -42,10 +44,10 @@ sources:
 
 transformations:
   courses:
+    source: $sources.courses
     operations:
       - operation: join
         sources:
-          - $sources.courses
           - $sources.schools
         join_type: inner
         left_key: school_id
